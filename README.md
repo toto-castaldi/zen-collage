@@ -10,6 +10,10 @@ dentro un ritaglio circolare, scegli lo **sfondo** (colore o trasparente) e prem
 L'app è pensata per l'uso **in orizzontale**: su smartphone in verticale appare l'invito
 a ruotare il telefono.
 
+## Esempio
+
+![Esempio di collage ZEN](example.png)
+
 ## Struttura
 
 ```
