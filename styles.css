@@ -1,0 +1,192 @@
+:root {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --panel-2: #334155;
+  --accent: #38bdf8;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior: none;
+}
+
+/* ---------- Overlay rotazione ---------- */
+#rotate-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  text-align: center;
+  padding: 1.5rem;
+}
+#rotate-overlay[hidden] { display: none; }
+.rotate-phone {
+  font-size: 3.5rem;
+  animation: tilt 1.6s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes tilt {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(90deg); }
+}
+.rotate-inner p { font-size: 1.25rem; margin: 1rem 0 .35rem; }
+.rotate-inner small { color: var(--muted); }
+
+/* ---------- Layout principale ---------- */
+#app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem .9rem;
+  flex: 0 0 auto;
+}
+.topbar h1 {
+  font-size: 1.15rem;
+  letter-spacing: .12em;
+  margin: 0;
+  font-weight: 800;
+}
+.topbar h1 span {
+  color: var(--accent);
+  font-weight: 300;
+  margin-left: .2em;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #042f3d;
+  border: none;
+  border-radius: 999px;
+  padding: .55rem 1.1rem;
+  font-weight: 700;
+  font-size: .95rem;
+  cursor: pointer;
+}
+.btn-primary:active { transform: scale(.97); }
+
+.btn-ghost {
+  background: var(--panel-2);
+  color: var(--text);
+  border: none;
+  border-radius: 8px;
+  padding: .45rem .8rem;
+  cursor: pointer;
+  font-size: .85rem;
+}
+
+/* ---------- Stage / canvas ---------- */
+.stage {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  padding: 0 .5rem;
+}
+#preview {
+  max-width: 100%;
+  max-height: 100%;
+  touch-action: none;        /* gestiamo noi pan/zoom */
+  border-radius: 10px;
+}
+.hint {
+  color: var(--muted);
+  font-size: .72rem;
+  margin: .35rem 0 0;
+  text-align: center;
+}
+
+/* ---------- Tabs lettere ---------- */
+.letter-tabs {
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+  padding: .4rem;
+  flex: 0 0 auto;
+}
+.letter-tabs button {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 10px;
+  border: 2px solid var(--panel-2);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+.letter-tabs button.active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---------- Thumbnails ---------- */
+.thumbs {
+  flex: 0 0 auto;
+  display: flex;
+  gap: .5rem;
+  overflow-x: auto;
+  padding: .4rem .8rem;
+  scrollbar-width: thin;
+}
+.thumbs img {
+  height: 64px;
+  width: 64px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  flex: 0 0 auto;
+  background: var(--panel-2);
+}
+.thumbs img.selected { border-color: var(--accent); }
+
+/* ---------- Controlli ---------- */
+.controls {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: .5rem .9rem calc(.6rem + env(safe-area-inset-bottom));
+  background: var(--panel);
+}
+.ctrl {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .85rem;
+  color: var(--muted);
+}
+.ctrl input[type="range"] { width: 130px; }
+.bg-ctrl { margin-left: auto; }
+.bg-ctrl input[type="color"] {
+  width: 32px; height: 28px;
+  border: none; background: none; padding: 0; cursor: pointer;
+}
+.chk { display: flex; align-items: center; gap: .3rem; font-size: .8rem; }
+
+/* Su schermi molto stretti/alti accorcia gli slider */
+@media (max-width: 560px) {
+  .ctrl input[type="range"] { width: 90px; }
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>ZEN Collage</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Overlay: invito a ruotare lo smartphone in orizzontale -->
+  <div id="rotate-overlay" hidden>
+    <div class="rotate-inner">
+      <div class="rotate-phone">📱</div>
+      <p>Ruota lo smartphone in orizzontale</p>
+      <small>L'app funziona meglio in modalità panoramica</small>
+    </div>
+  </div>
+
+  <main id="app">
+    <header class="topbar">
+      <h1>ZEN<span>collage</span></h1>
+      <button id="download-btn" class="btn-primary" type="button">⬇ Download</button>
+    </header>
+
+    <!-- Anteprima: stesso canvas usato per l'export (WYSIWYG) -->
+    <section class="stage">
+      <canvas id="preview" aria-label="Anteprima collage ZEN"></canvas>
+      <p class="hint">Trascina dentro un cerchio per spostare la foto · rotellina o pizzica per lo zoom</p>
+    </section>
+
+    <!-- Selettore lettera attiva -->
+    <nav class="letter-tabs" id="letter-tabs" aria-label="Scegli la lettera da modificare">
+      <button type="button" data-letter="Z" class="active">Z</button>
+      <button type="button" data-letter="E">E</button>
+      <button type="button" data-letter="N">N</button>
+    </nav>
+
+    <!-- Striscia thumbnail della lettera attiva -->
+    <section class="thumbs" id="thumbs" aria-label="Scegli la foto"></section>
+
+    <!-- Controlli del cerchio attivo -->
+    <section class="controls">
+      <label class="ctrl">
+        <span>Zoom</span>
+        <input type="range" id="zoom" min="1" max="4" step="0.01" value="1" />
+      </label>
+      <label class="ctrl">
+        <span>Rotazione</span>
+        <input type="range" id="rotation" min="-180" max="180" step="1" value="0" />
+      </label>
+      <button type="button" id="reset-btn" class="btn-ghost">Reset foto</button>
+      <div class="ctrl bg-ctrl">
+        <span>Sfondo</span>
+        <input type="color" id="bg-color" value="#ffffff" />
+        <label class="chk">
+          <input type="checkbox" id="bg-transparent" /> Trasparente
+        </label>
+      </div>
+    </section>
+  </main>
+
+  <script src="manifest.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
