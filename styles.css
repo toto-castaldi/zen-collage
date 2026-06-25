@@ -93,6 +93,34 @@ html, body {
   font-size: .85rem;
 }
 
+/* ---------- Workspace a tre colonne (landscape) ---------- */
+.workspace {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+/* Colonne laterali */
+.sidebar {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--panel);
+}
+.sidebar-left {
+  width: clamp(96px, 13vw, 150px);
+  border-right: 1px solid rgba(148, 163, 184, .15);
+}
+.sidebar-right {
+  width: clamp(170px, 20vw, 240px);
+  gap: 1rem;
+  padding: 1rem .9rem calc(1rem + env(safe-area-inset-bottom));
+  border-left: 1px solid rgba(148, 163, 184, .15);
+  justify-content: flex-start;
+}
+
 /* ---------- Stage / canvas ---------- */
 .stage {
   flex: 1 1 auto;
@@ -100,8 +128,9 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-width: 0;
   min-height: 0;
-  padding: 0 .5rem;
+  padding: .4rem;
 }
 #preview {
   max-width: 100%;
@@ -116,22 +145,22 @@ html, body {
   text-align: center;
 }
 
-/* ---------- Tabs lettere ---------- */
+/* ---------- Tabs lettere (in cima alla colonna sinistra) ---------- */
 .letter-tabs {
   display: flex;
-  gap: .5rem;
+  gap: .4rem;
   justify-content: center;
-  padding: .4rem;
+  padding: .5rem .3rem;
   flex: 0 0 auto;
 }
 .letter-tabs button {
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 2.3rem;
+  height: 2.3rem;
   border-radius: 10px;
   border: 2px solid var(--panel-2);
   background: var(--panel);
   color: var(--text);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 800;
   cursor: pointer;
 }
@@ -140,18 +169,20 @@ html, body {
   color: var(--accent);
 }
 
-/* ---------- Thumbnails ---------- */
+/* ---------- Thumbnails (in colonna, scroll verticale) ---------- */
 .thumbs {
-  flex: 0 0 auto;
+  flex: 1 1 auto;
   display: flex;
-  gap: .5rem;
-  overflow-x: auto;
-  padding: .4rem .8rem;
+  flex-direction: column;
+  align-items: center;
+  gap: .55rem;
+  overflow-y: auto;
+  padding: .4rem .3rem .8rem;
   scrollbar-width: thin;
 }
 .thumbs img {
-  height: 64px;
-  width: 64px;
+  width: clamp(64px, 11vw, 96px);
+  aspect-ratio: 1;
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid transparent;
@@ -161,32 +192,19 @@ html, body {
 }
 .thumbs img.selected { border-color: var(--accent); }
 
-/* ---------- Controlli ---------- */
-.controls {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  padding: .5rem .9rem calc(.6rem + env(safe-area-inset-bottom));
-  background: var(--panel);
-}
+/* ---------- Controlli (colonna destra) ---------- */
 .ctrl {
   display: flex;
-  align-items: center;
-  gap: .5rem;
+  flex-direction: column;
+  gap: .4rem;
   font-size: .85rem;
   color: var(--muted);
 }
-.ctrl input[type="range"] { width: 130px; }
-.bg-ctrl { margin-left: auto; }
+.ctrl input[type="range"] { width: 100%; }
+.bg-row { display: flex; align-items: center; gap: .6rem; }
 .bg-ctrl input[type="color"] {
-  width: 32px; height: 28px;
+  width: 38px; height: 30px;
   border: none; background: none; padding: 0; cursor: pointer;
 }
-.chk { display: flex; align-items: center; gap: .3rem; font-size: .8rem; }
-
-/* Su schermi molto stretti/alti accorcia gli slider */
-@media (max-width: 560px) {
-  .ctrl input[type="range"] { width: 90px; }
-}
+.chk { display: flex; align-items: center; gap: .3rem; font-size: .8rem; color: var(--text); }
+.sidebar-right .btn-ghost { align-self: flex-start; }
